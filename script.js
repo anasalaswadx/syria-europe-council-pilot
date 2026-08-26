@@ -26,8 +26,31 @@ document.querySelectorAll('.reveal').forEach((element) => observer.observe(eleme
 
 const form = document.getElementById('contact-form');
 const status = form.querySelector('.form-status');
+const submitButton = form.querySelector('.submit');
+const successDialog = document.getElementById('success-dialog');
+const formStartedAt = form.elements.form_started_at;
+const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycby7Wc9omf7Iwf0QUBg6e_aYx4feJn9R4scnP1zIqyoqlB9BHpCYkAt3Cnb0RO92R4Xw/exec';
 
-form.addEventListener('submit', (event) => {
+formStartedAt.value = Date.now().toString();
+
+const closeSuccessDialog = () => {
+  successDialog.hidden = true;
+  document.body.classList.remove('dialog-open');
+};
+
+successDialog.querySelectorAll('.success-close, .success-done').forEach((button) => {
+  button.addEventListener('click', closeSuccessDialog);
+});
+
+successDialog.addEventListener('click', (event) => {
+  if (event.target === successDialog) closeSuccessDialog();
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && !successDialog.hidden) closeSuccessDialog();
+});
+
+form.addEventListener('submit', async (event) => {
   event.preventDefault();
   status.classList.remove('error');
 
@@ -39,17 +62,34 @@ form.addEventListener('submit', (event) => {
   }
 
   const data = new FormData(form);
-  const subject = `[Syria Europe Council] ${data.get('topic')}`;
-  const body = [
-    `الاسم: ${data.get('name')}`,
-    `البريد الإلكتروني: ${data.get('email')}`,
-    `الجهة أو مجال الخبرة: ${data.get('organization') || 'غير مذكور'}`,
-    `الموضوع: ${data.get('topic')}`,
-    '',
-    'الرسالة:',
-    data.get('message')
-  ].join('\n');
+  const params = new URLSearchParams();
+  ['name', 'email', 'organization', 'topic', 'message', 'website', 'form_started_at'].forEach((field) => {
+    params.set(field, data.get(field) || '');
+  });
+  params.set('consent', 'yes');
+  params.set('source', window.location.origin);
 
-  status.textContent = 'سيُفتح تطبيق البريد على جهازك. راجع الرسالة ثم اضغط إرسال.';
-  window.location.href = `mailto:hello@syriaeuropecouncil.eu?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  submitButton.disabled = true;
+  submitButton.innerHTML = 'جارٍ إرسال الرسالة…';
+  status.textContent = '';
+
+  try {
+    await fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+      body: params.toString()
+    });
+    form.reset();
+    formStartedAt.value = Date.now().toString();
+    successDialog.hidden = false;
+    document.body.classList.add('dialog-open');
+    successDialog.querySelector('.success-done').focus();
+  } catch (error) {
+    status.textContent = 'تعذّر إرسال الرسالة الآن. يرجى المحاولة مجدداً أو مراسلتنا عبر البريد الإلكتروني.';
+    status.classList.add('error');
+  } finally {
+    submitButton.disabled = false;
+    submitButton.innerHTML = 'إرسال الرسالة <span>←</span>';
+  }
 });
