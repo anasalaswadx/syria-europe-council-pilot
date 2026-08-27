@@ -13,22 +13,26 @@ document.querySelectorAll('.nav a').forEach((link) => link.addEventListener('cli
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.08 });
+if (typeof window.IntersectionObserver === 'function') {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
 
-document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+  document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+} else {
+  document.querySelectorAll('.reveal').forEach((element) => element.classList.add('visible'));
+}
 
 const form = document.getElementById('contact-form');
 const status = form.querySelector('.form-status');
 const submitButton = form.querySelector('.submit');
 const successDialog = document.getElementById('success-dialog');
-const formStartedAt = form.elements.form_started_at;
+const formStartedAt = form.querySelector('[name="form_started_at"]');
 const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycby7Wc9omf7Iwf0QUBg6e_aYx4feJn9R4scnP1zIqyoqlB9BHpCYkAt3Cnb0RO92R4Xw/exec';
 
 formStartedAt.value = Date.now().toString();
