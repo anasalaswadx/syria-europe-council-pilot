@@ -33,7 +33,7 @@ const status = form.querySelector('.form-status');
 const submitButton = form.querySelector('.submit');
 const successDialog = document.getElementById('success-dialog');
 const formStartedAt = form.querySelector('[name="form_started_at"]');
-const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycby7Wc9omf7Iwf0QUBg6e_aYx4feJn9R4scnP1zIqyoqlB9BHpCYkAt3Cnb0RO92R4Xw/exec';
+const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwTIac3IYmCe5BPHg99JDsB567AoZ2wIXoQc-Vr7msywSMIrGQuaHuo_rV791-8fEEj/exec';
 
 formStartedAt.value = Date.now().toString();
 
