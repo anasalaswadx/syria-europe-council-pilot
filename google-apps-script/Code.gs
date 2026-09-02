@@ -9,7 +9,7 @@ const HEADERS = [
   'المصدر'
 ];
 
-const NOTIFICATION_EMAIL = 'hello@syriaeuropecouncil.eu';
+const NOTIFICATION_EMAIL = 'info@syriaeuropecouncil.eu';
 const MINIMUM_FILL_TIME_MS = 3000;
 const MAXIMUM_FORM_AGE_MS = 2 * 60 * 60 * 1000;
 const RATE_LIMIT_SECONDS = 60;
