@@ -24,5 +24,5 @@ footer{padding:2.5rem clamp(1.2rem,5vw,6rem);display:flex;align-items:center;gap
 .cards{align-items:start;background:var(--green)}.card h3{min-height:3.4rem}.card p{min-height:0}.card small{margin-top:1.2rem}
 @media(max-width:520px){.card h3{min-height:0}.card small{margin-top:1rem}}
 /* Official council logo: the white-background artwork stays crisp on the light header/footer. */
-.brand-logo,.footer-logo{display:block;flex:0 0 auto;object-fit:contain}.brand-logo{width:62px;height:62px}.footer-logo{width:124px;height:100px}.brand>span:last-child{min-width:max-content}.brand:focus-visible{outline:2px solid var(--coral);outline-offset:5px}
-@media(max-width:760px){.brand-logo{width:48px;height:48px}.brand{gap:.45rem}.brand b{font-size:.95rem}.brand small{font-size:.68rem}.footer-logo{width:92px;height:76px}}
+.brand-logo,.footer-logo{display:block;flex:0 0 auto;object-fit:contain}.header .brand{gap:.72rem;align-items:center}.brand-logo{width:58px;height:58px}.header .brand>span{display:grid;gap:.16rem;line-height:1}.header .brand b{font-size:1.08rem}.header .brand small{font-size:.76rem;letter-spacing:.18em}.footer-logo{width:146px;height:116px}.brand>span:last-child{min-width:max-content}.brand:focus-visible{outline:2px solid var(--coral);outline-offset:5px}
+@media(max-width:760px){.header .brand{gap:.45rem}.brand-logo{width:44px;height:44px}.header .brand b{font-size:.9rem}.header .brand small{font-size:.62rem;letter-spacing:.14em}.footer-logo{width:112px;height:90px}}
