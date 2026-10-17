@@ -19,6 +19,7 @@ footer{padding:2.5rem clamp(1.2rem,5vw,6rem);display:flex;align-items:center;gap
 /* Contributor profiles displayed inside their selected pathway */
 .volunteers{margin-top:1rem;padding:.7rem .75rem;border:1px solid rgba(239,132,81,.38);border-radius:4px;background:rgba(255,255,255,.055);display:grid;gap:.1rem}.volunteers b{color:#f3b293;font-size:.62rem;font-weight:600}.volunteers span{color:#fff;font-size:.68rem;line-height:1.7}
 .pathway-contributor{margin-top:1rem;padding:.8rem .75rem;border:1px solid rgba(239,132,81,.38);border-radius:4px;background:rgba(255,255,255,.055)}.pathway-contributor strong{display:block;color:#fff;font-size:.82rem;margin-bottom:.35rem}.pathway-contributor p{margin:.2rem 0;font-size:.67rem;line-height:1.75;color:#d4e3df}.pathway-contributor p b{color:#f3b293;font-weight:600}
+.contributor-brand{display:flex;align-items:center;gap:.55rem;margin:.2rem 0 .45rem}.contributor-brand img{width:42px;height:32px;object-fit:contain;background:#fff;border-radius:3px;padding:2px}.contributor-brand a{color:#f3b293;font-size:.68rem;font-weight:600;text-decoration:underline;text-underline-offset:3px}.contributor-brand a span{font-family:'DM Sans',sans-serif;direction:ltr;display:inline-block}
 /* Keep every pathway's descriptor directly beneath its description without artificial card height. */
 .cards{align-items:start;background:var(--green)}.card h3{min-height:3.4rem}.card p{min-height:0}.card small{margin-top:1.2rem}
 @media(max-width:520px){.card h3{min-height:0}.card small{margin-top:1rem}}
